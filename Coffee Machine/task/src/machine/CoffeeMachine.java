@@ -23,30 +23,12 @@ public class CoffeeMachine {
 
     public void doAction(String action) {
         switch (action) {
-
-            case "buy": {
-                buyDrink();
-                break;
-            }
-            case "fill": {
-                addSupplies();
-                break;
-            }
-            case "take": {
-                giveMoney();
-                break;
-            }
-            case "remaining": {
-                printCoffeeMachineStorage();
-                break;
-            }
-            case "exit": {
-                this.exit = true;
-                break;
-            }
-            default: {
-                System.out.println("Wrong command");
-            }
+            case "buy" -> buyDrink();
+            case "fill" -> addSupplies();
+            case "take" -> giveMoney();
+            case "remaining" -> printCoffeeMachineStorage();
+            case "exit" -> this.exit = true;
+            default -> System.out.println("Wrong command");
         }
     }
 
@@ -57,11 +39,14 @@ public class CoffeeMachine {
         int currentDrinkNumber;
         if ("back".contains(actionDrink)) {
             return;
+        } else if ("exit".contains(actionDrink)) {
+            exit = true;
+            return;
         } else {
             currentDrinkNumber = Integer.parseInt(actionDrink);
         }
 
-        Drink currentDrink = chooseReciept(currentDrinkNumber);
+        Drink currentDrink = new Drink(currentDrinkNumber);
         if (this.waterStorage >= currentDrink.needWater) {
             this.waterStorage -= currentDrink.needWater;
         } else {
@@ -91,10 +76,6 @@ public class CoffeeMachine {
 
     }
 
-    private static Drink chooseReciept(int numberOfDrink) {
-        return new Drink(numberOfDrink);
-    }
-
     private void addSupplies() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write how many ml of water you want to add:");
@@ -114,7 +95,7 @@ public class CoffeeMachine {
                 %d  ml of milk
                 %d  g of coffee beans
                 %d  disposable cups
-                $%d of money\n
+                $%d of money
                 """, this.waterStorage, this.milkStorage, this.coffeeBeansStorage, this.disposableCupsStorage, this.moneyStorage);
     }
 
