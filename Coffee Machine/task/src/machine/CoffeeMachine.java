@@ -3,12 +3,20 @@ package machine;
 import java.util.Scanner;
 
 public class CoffeeMachine {
-    private int waterStorage = 400;
-    private int milkStorage = 540;
-    private int coffeeBeansStorage = 120;
-    private int disposableCupsStorage = 9;
-    private int moneyStorage = 550;
+    private int waterStorage;
+    private int milkStorage;
+    private int coffeeBeansStorage;
+    private int disposableCupsStorage;
+    private int moneyStorage;
     private boolean exit = false;
+
+    public CoffeeMachine() {
+        waterStorage = 400;
+        milkStorage = 540;
+        coffeeBeansStorage = 120;
+        disposableCupsStorage = 9;
+        moneyStorage = 550;
+    }
 
 
     public static void main(String[] args) {
@@ -47,20 +55,20 @@ public class CoffeeMachine {
         }
 
         Drink currentDrink = new Drink(currentDrinkNumber);
-        if (this.waterStorage >= currentDrink.needWater) {
-            this.waterStorage -= currentDrink.needWater;
+        if (this.waterStorage >= currentDrink.getNeedWater()) {
+            this.waterStorage -= currentDrink.getNeedWater();
         } else {
             System.out.println("Sorry, not enough water!");
             return;
         }
-        if (this.milkStorage >= currentDrink.needMilk) {
-            this.milkStorage -= currentDrink.needMilk;
+        if (this.milkStorage >= currentDrink.getNeedMilk()) {
+            this.milkStorage -= currentDrink.getNeedMilk();
         } else {
             System.out.println("Sorry, not enough milk!");
             return;
         }
-        if (this.coffeeBeansStorage >= currentDrink.needCoffeeBeans) {
-            this.coffeeBeansStorage -= currentDrink.needCoffeeBeans;
+        if (this.coffeeBeansStorage >= currentDrink.getNeedCoffeeBeans()) {
+            this.coffeeBeansStorage -= currentDrink.getNeedCoffeeBeans();
         } else {
             System.out.println("Sorry, not enough beans!");
             return;
@@ -72,7 +80,7 @@ public class CoffeeMachine {
             return;
         }
         System.out.println("I have enough resources, making you a coffee!");
-        this.moneyStorage += currentDrink.priceOfDrink;
+        this.moneyStorage += currentDrink.getPriceOfDrink();
 
     }
 
